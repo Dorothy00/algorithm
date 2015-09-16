@@ -3,6 +3,9 @@ import sys
 from InputData import input_sort_data;
 
 def merge_sort(data):
+	""" sort a list of data use merge sort
+		time complexity is (nlgn)
+	"""
 	if type(data)!=list:
 		print 'Parameter of data should be a list.';
 		sys.exit();
