@@ -41,9 +41,35 @@ def insert_sort_recursive(data):
 		insert_sort(data);
 	return data;
 
+def find_insert_index(data,high,target):
+	low = 0;
+	index = (low + high) / 2;
+	while low < high:
+		if data[index] < target:
+			low = index + 1;
+		else:
+			high = index - 1;
+		index = (low + high) /2;
+	if data[index] < target: #should not be <= important!
+		index += 1;
+	return index;
+
+def insert_binary_sort(data):
+	for i in range(1,len(data)):
+		index = find_insert_index(data,i,data[i]);
+		key = data[i];
+		j = i;
+		while j >= index:
+			print j;
+			data[j] = data[j - 1];
+			j -= 1;
+		data[index] = key;
+	return data;
+
+
 if __name__ == '__main__':
 	data = input_sort_data();
 	#print insert_sort(data);
-	print insert_sort_recursive(data);
-
+    #print insert_sort_recursive(data);
+	print insert_binary_sort(data);
 
