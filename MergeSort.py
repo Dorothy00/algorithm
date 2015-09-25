@@ -19,7 +19,6 @@ def merge_sort(data):
 		return data;
 
 def merge(left,right):
-	global num
 	if type(left)!=list or type(right)!=list:
 		print 'Parameter should be list.';
 		sys.exit();
@@ -37,8 +36,6 @@ def merge(left,right):
 		else:
 			data.append(right[j]);
 			j = j + 1;
-			num += 1;
-			print "num:" ,num
 	
 	while j < n_right:
 		data.append(right[j]);
@@ -49,8 +46,6 @@ def merge(left,right):
 	return data;
 	
 if __name__ == '__main__':
-	global num;
 	data = input_sort_data();
 	print merge_sort(data);
-	print num;
 
