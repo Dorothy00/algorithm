@@ -21,6 +21,15 @@ def find_maxmum_subarray(data,low,high):
 		else:
 			return (cross_low,cross_high,cross_sum)
 
+def find_maxmum_subarray_violence(data,low,high):
+	(max_low,max_high,max_sum) = (low,low,data[low])
+	for i in range(low + 1,high):   # from index 1 to len - 2 
+		(cross_low,cross_high,cross_sum) = find_max_cross_subarray(data,low,i,high)
+		if max_sum < cross_sum:
+			(max_low,max_high,max_sum) = (cross_low,cross_high,cross_sum)
+	
+	return (max_low,max_high,max_sum)
+
 
 def find_max_cross_subarray(data,low,mid,high):
 	left_sum = -sys.maxint - 1
@@ -44,4 +53,5 @@ def find_max_cross_subarray(data,low,mid,high):
 
 if __name__ == '__main__':
 	data = input_sort_data()
-	print find_maxmum_subarray(data,0,15)
+	print find_maxmum_subarray(data,0,5)
+	print find_maxmum_subarray_violence(data,0,5)
