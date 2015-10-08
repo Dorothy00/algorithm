@@ -21,6 +21,21 @@ def find_maxmum_subarray(data,low,high):
 		else:
 			return (cross_low,cross_high,cross_sum)
 
+def find_maxmum_subarray_linear(data,low,high):
+	max_sum = -sys.maxint - 1
+	total = 0
+	m_low = 0
+	m_high = 0
+	for i in range(low, high+1):
+		total += data[i]
+		if total > max_sum:
+			max_sum = total
+			m_high = i
+		if total < 0:
+			total = 0
+
+	return (m_low,m_high,max_sum)
+
 def find_maxmum_subarray_violence(data,low,high):
 	(max_low,max_high,max_sum) = (low,low,data[low])
 	for i in range(low + 1,high):   # from index 1 to len - 2 
