@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 typedef struct
 {
@@ -20,67 +21,93 @@ int parent(int);
 
 int main()
 {
-	int items[] = {16,4,10,14,7,9,3,2,8,1};
-	heap_t heap = {
-		items,
-		10,
-		10
-	};
-	max_heapify(&heap, 1);
-	for(int i = 0; i < heap.heap_size; i++)
+	printf("----------------------Heap---------------------\n");
+	printf("\t0. max_heapify(heap_t*, int)\n");
+	printf("\t1. build_max_heap(heap_t*)\n");
+	printf("\t2. heap_extract_max(heap_t*)\n");
+	printf("\t3. heap_sort(heap_t*)\n");
+	printf("\t4. heap_increase_key(heap_t*, int, int)\n");
+	printf("\t5. heap_insert(heap_t*, int)\n");
+	printf("Please select (-1 to quit): ");
+	int select;
+	scanf("%d", &select);
+	if(select == -1)
 	{
-		printf("%d ",heap.elements[i]);
+		exit(0);
 	}
-	printf("\n");
-	int items2[] = {4,1,3,2,16,9,10,14,8,7};
-	heap_t heap2 = {
-		items2,
-		10,
-		10
-	};
-	build_max_heap(&heap2);
-	for(int i = 0; i < heap2.heap_size; i++)
+	while(select != -1)
 	{
-		printf("%d ",heap2.elements[i]);
-	}
-	heap_extract_max(&heap);
-	printf("\n");
-	for(int i = 0; i < heap.heap_size; i++)
-	{
-		printf("%d ",heap.elements[i]);
-	}
-	printf("\n");
-	heap_sort(&heap2);
-	for(int i = 0; i < heap2.length; i++)
-	{
-		printf("%d ",heap2.elements[i]);
-	}
-	printf("\n");
-	int items3[] = {4,1,3,2,16,9,10,14,8,7};
-	heap_t heap3 = {
-		items3,
-		10,
-		10
-	};
-	build_max_heap(&heap3);
-	heap_increase_key(&heap3, 8, 15);
-	for(int i = 0; i < heap3.length; i++)
-	{
-		printf("%d ",heap3.elements[i]);
-	}
+		heap_t heap;
+		int length;
+		int heap_size;
+		printf("Now create a heap\n");
+		printf("Enter heap length: ");
+		scanf("%d",&length);
+		printf("Enter heap size: ");
+		scanf("%d",&heap_size);
+		printf("Enter elements: \n");
+		int items[length];
+		for(int i = 0; i < heap_size; i++)
+		{
+			scanf("%d",&items[i]); 
+		}
+		heap.length = length;
+		heap.heap_size = heap_size;
+		heap.elements = items;
+		
+		switch(select)
+		{
+			case 0:
+				printf("Please enter index you want to heapify: ");
+				int index;
+				scanf("%d",&index);
+				max_heapify(&heap, index);
+				break;
+			case 1:
+				build_max_heap(&heap);
+				break;
+			case 2:
+				build_max_heap(&heap);
+				heap_extract_max(&heap);
+				break;
+			case 3:
+				build_max_heap(&heap);
+				heap_sort(&heap);
+				break;
+			case 4:
+				build_max_heap(&heap);
+				printf("Please enter index you want to increase: ");
+				int i = getchar();
+				printf("Please enter key: ");
+				int key = getchar();
+				heap_increase_key(&heap, i, key);
+				break;
+			case 5:
+				build_max_heap(&heap);
+				printf("Please enter elements you want to insert: ");
+				int element = getchar();
+				heap_insert(&heap,element);
+				break;
+			default:
+				printf("Num error.");
+		}
+		for(int i = 0; i < heap.length; i++)
+		{
+			printf("%d ", heap.elements[i]);
+		}
 
-	printf("start\n");
-	int items4[] = {15,13,9,5,12,8,7,4,0,6,2,1};
-	heap_t heap4 = {
-		items4,
-		12,
-		12
-	};
-	heap_insert(&heap4,10);
-	for(int i = 0; i < heap4.length; i++)
-	{
-		printf("%d ",heap4.elements[i]);
+		printf("\n\n");
+		printf("\t0. max_heapify(heap_t*, int)\n");
+		printf("\t1. build_max_heap(heap_t*)\n");
+		printf("\t2. heap_extract_max(heap_t*)\n");
+		printf("\t3. heap_sort(heap_t*)\n");
+		printf("\t4. heap_increase_key(heap_t*, int, int)\n");
+		printf("\t5. heap_insert(heap_t*, int)\n");
+		printf("Please select (-1 to quit): ");
+		scanf("%d",&select);
 	}
+	printf("----------------------End---------------------\n");
+
 	return 0;
 }
 
