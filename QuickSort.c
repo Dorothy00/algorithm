@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <time.h>
 
+#define COLOR_NONE "\033[0m"
+#define FONT_COLOR_RED "\033[0;31m"
+
 void quick_sort(int a[], int p, int r);
 int partition(int a[], int p, int r);
 int randomized_partition(int a[], int p, int r);
@@ -17,8 +20,8 @@ int main()
 		printf(" 1. quick_sort\n");
 		printf(" 2. randomized_quick_sort\n");
 		printf(" 3. ameliorate_quick_sort\n");
-		printf(" 3. compare quick_sort and ameliorate_quick_sort\n");
-		printf(" Please select(1, 2, 3, -1 to quit): ");
+		printf(" 4. compare quick_sort and ameliorate_quick_sort\n");
+		printf(" Please select(1, 2, 3, 4, -1 to quit): ");
 		int select;
 		scanf("%d", &select);
 		if(select == -1)
@@ -30,12 +33,18 @@ int main()
 		printf("How many numbers do you want to sort? ");
 		scanf("%d", &length);
 		int data[length]; 
-		printf("data before sorting is: \n");
+		printf(FONT_COLOR_RED"data before sorting is: \n"COLOR_NONE);
 		srand((unsigned)time(NULL));
+		int j = 0;
 		for(int i = 0; i < length; i++)
 		{
-			data[i] = rand() % 100;
+			j ++;
+			data[i] = rand() % (length * 5);
 			printf("%d ", data[i]);
+			if(j % 10 == 0)
+			{
+				printf("\n");
+			}
 		}
 		printf("\n");
 		switch(select)
@@ -52,17 +61,38 @@ int main()
 				scanf("%d", &k);
 				ameliorate_quick_sort(data, 0, length - 1, k);
 				break;
-			case 3:
+			case 4:
 				printf("Please enter k: ");
-				int k;
-				scanf("%d", &k);
-				int time ameliorate_quick_sort(data, 0, length - 1, k);
+				int kk;
+				scanf("%d", &kk);
+				int data_copy[length];
+				for(int i = 0; i < length; i++)
+				{
+					data_copy[i] = data[i];
+				}
+				clock_t start1 = clock();
+				ameliorate_quick_sort(data, 0, length - 1, kk);
+				clock_t end1 = clock();
+				clock_t duration1 = end1 - start1;
+				clock_t start2 = clock();
+				quick_sort(data_copy, 0, length - 1);
+				clock_t end2 = clock();
+				clock_t duration2 = end2 - start2;
+				printf(FONT_COLOR_RED"Run time of ameliorate_quick_sort is: %lu\n"COLOR_NONE, duration1);
+				printf(FONT_COLOR_RED"Run time of ameliorate_quick_sort is: %lu\n"COLOR_NONE, duration2);
+				break;
 
 		}
-		printf("After sort...\n");
+		printf(FONT_COLOR_RED"After sorting is:\n"COLOR_NONE);
+		int m = 0;
 		for(int i = 0; i < length; i ++)
 		{
+			m ++;
 			printf("%d ", data[i]);
+			if(m % 10 == 0)
+			{
+				printf("\n");
+			}
 		}
 		printf("\n");
 	}
