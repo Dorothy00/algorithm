@@ -79,7 +79,7 @@ int main()
 				clock_t end2 = clock();
 				clock_t duration2 = end2 - start2;
 				printf(FONT_COLOR_RED"Run time of ameliorate_quick_sort is: %lu\n"COLOR_NONE, duration1);
-				printf(FONT_COLOR_RED"Run time of ameliorate_quick_sort is: %lu\n"COLOR_NONE, duration2);
+				printf(FONT_COLOR_RED"Run time of quick_sort is: %lu\n"COLOR_NONE, duration2);
 				break;
 
 		}
