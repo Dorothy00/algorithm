@@ -60,12 +60,13 @@ void print_rb_tree(RB_TREE tree, RB_NODE node)
 {
     if(node != NULL)
     {
+		printf("%d", node -> key);
         if(node -> color == BLACK)
         {
-            printf("%d", node -> key);
+            printf("black");
         }else
         {
-            printf("%d", node -> key);
+            printf("red");
         }
         print_rb_tree(tree, node -> left);
         print_rb_tree(tree, node -> right);
