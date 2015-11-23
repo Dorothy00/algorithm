@@ -8,7 +8,7 @@ int main()
 {
 	int len = 7;
 	int n = len - 1;
-	int p[7] = {30, 35, 15, 5, 10, 20, 25};
+	int p[7] = {5, 10, 3, 12, 5, 50, 6};
 	int m[7][7];
 	int s[7][7];
 	MatrixChainOrder(p, len, m, s);
