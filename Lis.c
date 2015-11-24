@@ -4,8 +4,9 @@
 
 int LIS(int* arr, int* L, int n);
 void outputLIS(int* arr, int* L, int index, int lis);
-int LIS2(int *arr, int *P, int n);
-int BiSearch(int *B, int len, int t);
+int LIS2(int *arr, int *B, int *P, int n);
+int BiSearch(int *arr, int *B, int len, int t);
+void outputLIS2(int *arr, int *B, int *P, int n, int len);
 int main()
 {
 	int a[6] = {5, 6, 7, 1, 2, 8};
@@ -13,10 +14,12 @@ int main()
 	int lis = LIS(a, L, 6);
 	outputLIS(a, L, 5, lis);
 	printf("\n");
-	int P[6];
-//	int b[9] = {2, 1, 5, 3, 6, 4, 8, 9, 7};
-	int b[5] = {2, 1, 5, 3, 6};
-	int len = LIS2(a, P, 6);
+	int P[10];
+	int B[10];
+	int b[9] = {2, 1, 5, 3, 6, 4, 8, 9, 7};
+//	int b[5] = {2, 1, 5, 3, 6};
+	int len = LIS2(b, B, P, 9);
+	outputLIS2(b, B, P, 9, len);
 	printf("len: %d", len);
 	return 0;
 }
@@ -64,27 +67,28 @@ void outputLIS(int* arr, int* L, int index, int lis)
 	}
 }
 
-int LIS2(int *arr, int *P, int n)
+int LIS2(int *arr, int *B, int *P, int n)
 {
-	int B[n + 1];
 	int len = 1;
 	B[0] = 1;
-	B[1] = arr[0];
+	B[1] = 0;
 	for(int i = 1; i < n; i++)
 	{
-		if(arr[i] > B[len])
+		if(arr[i] > arr[B[len]])
 		{
-			B[++len] = arr[i];
+			P[i] = B[len];
+			B[++len] = i;
 		}else
 		{
-			int pos = BiSearch(B, len, arr[i]);
-			B[pos] = arr[i];
+			int pos = BiSearch(arr, B, len, arr[i]);
+			B[pos] = i;
+			P[i] = B[pos - 1];
 		}
 	}
 	return len;
 }
 
-int BiSearch(int *B, int len, int t)
+int BiSearch(int *arr, int *B, int len, int t)
 {
 	int low = 1;
 	int high = len;
@@ -92,13 +96,25 @@ int BiSearch(int *B, int len, int t)
 	while(low <= high)
 	{
 		mid = (low + high) / 2;
-		if(t >= B[mid])
+		if(t >= arr[B[mid]])
 		{
 			low = mid + 1;		
-		}else if(t < B[mid])
+		}else 
 		{
 			high = mid - 1;
 		}
 	}
 	return low;
+}
+
+void outputLIS2(int *arr, int *B, int *P, int n, int len)
+{
+	int last_index = B[len];
+	printf("%d ", arr[last_index]);
+	for(int i = len - 1; i >= 1; i--)
+	{
+		int index = P[last_index];
+		printf("%d ", arr[index]);
+		last_index = index;
+	}
 }
