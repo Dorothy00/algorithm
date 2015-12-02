@@ -84,7 +84,7 @@ int EditDistance(char *x, char *y, int m, int n, int c[m + 1][n + 1], char op[m 
 			if(c[i][j] > cost_insert)
 			{
 				c[i][j] = cost_insert;
-				op[i][j] = DELETE;
+				op[i][j] = INSERT;
 			}
 		}
 	}
