@@ -4,9 +4,9 @@
 
 int N = 10;  // 任务数
 int K = 3;  // 机器数
-int t[30]; // 每个任务需要的时间
-int best[30]; // 每个任务选择使用的机器
-int tmpBest[30]; // 当前每个任务选择使用的机器
+int t[10]; // 每个任务需要的时间
+int best[10]; // 每个任务选择使用的机器
+int tmpBest[10]; // 当前每个任务选择使用的机器
 int bestTime = INT_MAX; // 最佳调度时间
 int c[3]; // 每个机器上当前花费的时间
 
@@ -59,7 +59,6 @@ void BestSchedule(int dep)
 			tmpBest[dep] = i + 1;
 			if(c[i] < bestTime)
 			{
-				printf("i: %d", i);
 				BestSchedule(dep + 1);
 			}
 			c[i] -= t[dep];
