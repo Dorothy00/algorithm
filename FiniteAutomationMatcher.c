@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include <string.h>
 
-void ComputeTransitionFunction(char *pattern, char*chset, int n, int ST[][n]);
-void nextState(char *pattern, char *chset, char c, int curS, int* neS);
-void FiniteAutomationMatcher(char *T, char *pattern, char* chset, int chsetNum, int ST[][chsetNum]);
+void ComputeTransitionFunction(char *pattern, char *charset, int n, int ST[][n]);
+void nextState(char *pattern, char c, int curS, int* neS);
+void FiniteAutomationMatcher(char *T, char *pattern, char *chset, int chsetNum, int ST[][chsetNum]);
 
 int main()
 {
@@ -56,7 +56,7 @@ void ComputeTransitionFunction(char *pattern, char*chset, int n, int ST[][n])
 		for(int c = 0; c < n; c++)
 		{
 			int neState;
-			nextState(pattern, chset, chset[c], q, &neState);
+			nextState(pattern, chset[c], q, &neState);
 			ST[q][c] = neState;
 		}
 	}
@@ -65,7 +65,7 @@ void ComputeTransitionFunction(char *pattern, char*chset, int n, int ST[][n])
 /*
  * 根据当前状态计算下一状态
  */
-void nextState(char *pattern, char *chset, char c, int curS, int* neS)
+void nextState(char *pattern, char c, int curS, int* neS)
 {
 	/* 输入字符与pattern中已匹配字符的下一字符相等，则下一输入字符后状态数加一（即匹配的字符数多了一个）*/	
 	if(c == pattern[curS])
